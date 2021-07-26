@@ -47,7 +47,7 @@ class DividendYieldCalculatorTest {
     }
 
     @Test
-    void throwsErrorWhenStockNotFound() {
+    void throwsErrorWhenInvalidPriceEntered() {
         assertThrows(InvalidPriceException.class, () -> {
             testeeCalculator.calculateDividendYield(GIN, 0);
         });
