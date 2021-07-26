@@ -5,7 +5,6 @@ import com.simple.stock.market.assignment.model.Stock;
 import com.simple.stock.market.assignment.model.StockSymbol;
 
 import java.util.List;
-import java.util.Optional;
 
 import static com.simple.stock.market.assignment.model.StockType.COMMON;
 
@@ -21,8 +20,9 @@ public class DividendYieldCalculator {
         if (price <= 0) {
             throw new InvalidPriceException();
         }
-        Optional<Stock> selectedStockOptional = stocks.stream().filter(stock -> stock.getSymbol().equals(stockSymbol)).findFirst();
-        Stock selectedStock = selectedStockOptional.get();
+        Stock selectedStock = stocks.stream()
+                .filter(stock -> stock.getSymbol().equals(stockSymbol)).findFirst().get();
+
         if(selectedStock.getStockType().equals(COMMON)) {
             return selectedStock.getLastDividend() / price;
         } else {
