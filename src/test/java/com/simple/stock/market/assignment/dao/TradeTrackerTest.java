@@ -14,12 +14,12 @@ import static com.simple.stock.market.assignment.model.StockSymbol.TEA;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class TradeRecorderTest {
+class TradeTrackerTest {
 
-    private TradeRecorder testee;
+    private TradeTracker testee;
     @BeforeEach
     void setUp() {
-        testee =  new TradeRecorder();
+        testee =  new TradeTracker();
     }
 
     @Test

@@ -9,14 +9,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TradeRecorder {
+public class TradeTracker {
     private final Map<StockSymbol, List<Trade>> tradeMap;
 
-    public TradeRecorder() {
+    public TradeTracker() {
         this.tradeMap = new HashMap<>();
     }
 
-    void recordTrade(StockSymbol stockSymbol, Trade trade) {
+    public void recordTrade(StockSymbol stockSymbol, Trade trade) {
         if(tradeMap.containsKey(stockSymbol)) {
             tradeMap.get(stockSymbol).add(trade);
         } else {
@@ -26,7 +26,7 @@ public class TradeRecorder {
         }
     }
 
-    List<Trade> getTradesForStock(StockSymbol stockSymbol) {
+    public List<Trade> getTradesForStock(StockSymbol stockSymbol) {
         if(tradeMap.containsKey(stockSymbol)) {
             return tradeMap.get(stockSymbol);
         } else {
