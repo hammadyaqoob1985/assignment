@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class TradeTracker {
     private final Map<StockSymbol, List<Trade>> tradeMap;
@@ -32,5 +33,9 @@ public class TradeTracker {
         } else {
            throw new StockNotFoundException();
         }
+    }
+
+    public List<Trade> getAllTrades() {
+        return tradeMap.entrySet().stream().flatMap(e -> e.getValue().stream()).collect(Collectors.toList());
     }
 }
