@@ -16,17 +16,22 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TradeTrackerTest {
 
+    Trade teaTrade;
+    Trade firstAleTrade;
+    Trade secondAleTrade;
+
     private TradeTracker testee;
     @BeforeEach
     void setUp() {
+        teaTrade = new Trade(ZonedDateTime.now(), 3, TradeTypeIndicator.BUY, 12);
+        firstAleTrade = new Trade(ZonedDateTime.now(), 5, TradeTypeIndicator.BUY, 12);
+        secondAleTrade = new Trade(ZonedDateTime.now(), 3, TradeTypeIndicator.SELL, 12);
+
         testee =  new TradeTracker();
     }
 
     @Test
     void saveAndRetrieveTrades() {
-        Trade teaTrade = new Trade(ZonedDateTime.now(), 3, TradeTypeIndicator.BUY, 12);
-        Trade firstAleTrade = new Trade(ZonedDateTime.now(), 5, TradeTypeIndicator.BUY, 12);
-        Trade secondAleTrade = new Trade(ZonedDateTime.now(), 3, TradeTypeIndicator.SELL, 12);
         testee.recordTrade(ALE, firstAleTrade);
         testee.recordTrade(ALE, secondAleTrade);
         testee.recordTrade(TEA, teaTrade);
@@ -42,9 +47,18 @@ class TradeTrackerTest {
     }
 
     @Test
+    void getAllTrades() {
+        testee.recordTrade(ALE, firstAleTrade);
+        testee.recordTrade(ALE, secondAleTrade);
+        testee.recordTrade(TEA, teaTrade);
+
+        List<Trade> trades = testee.getAllTrades();
+        assertThat(trades).containsExactlyInAnyOrder(firstAleTrade, secondAleTrade, teaTrade);
+
+    }
+
+    @Test
     void testExceptionThrownWhenStockSymbolNotFound() {
-        assertThrows(StockNotFoundException.class, () -> {
-            testee.getTradesForStock(TEA);
-        });
+        assertThrows(StockNotFoundException.class, () -> testee.getTradesForStock(TEA));
     }
 }
