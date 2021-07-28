@@ -5,16 +5,15 @@ import com.simple.stock.market.assignment.model.StockSymbol;
 import com.simple.stock.market.assignment.model.Trade;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 public class TradeTracker {
-    private final Map<StockSymbol, List<Trade>> tradeMap;
+    private final ConcurrentHashMap<StockSymbol, List<Trade>> tradeMap;
 
     public TradeTracker() {
-        this.tradeMap = new HashMap<>();
+        this.tradeMap = new ConcurrentHashMap<>();
     }
 
     public void recordTrade(StockSymbol stockSymbol, Trade trade) {
