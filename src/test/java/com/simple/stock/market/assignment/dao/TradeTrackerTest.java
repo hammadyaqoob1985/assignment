@@ -1,6 +1,6 @@
 package com.simple.stock.market.assignment.dao;
 
-import com.simple.stock.market.assignment.exception.StockNotFoundException;
+import com.simple.stock.market.assignment.exception.NoTradesException;
 import com.simple.stock.market.assignment.model.Trade;
 import com.simple.stock.market.assignment.model.TradeTypeIndicator;
 import org.junit.jupiter.api.BeforeEach;
@@ -58,6 +58,6 @@ class TradeTrackerTest {
 
     @Test
     void testExceptionThrownWhenStockSymbolNotFound() {
-        assertThrows(StockNotFoundException.class, () -> testee.getTradesForStock(TEA));
+        assertThrows(NoTradesException.class, () -> testee.getTradesForStock(TEA));
     }
 }

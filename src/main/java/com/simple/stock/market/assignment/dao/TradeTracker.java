@@ -1,6 +1,6 @@
 package com.simple.stock.market.assignment.dao;
 
-import com.simple.stock.market.assignment.exception.StockNotFoundException;
+import com.simple.stock.market.assignment.exception.NoTradesException;
 import com.simple.stock.market.assignment.model.StockSymbol;
 import com.simple.stock.market.assignment.model.Trade;
 import org.springframework.stereotype.Repository;
@@ -32,7 +32,7 @@ public class TradeTracker {
         if(tradeMap.containsKey(stockSymbol)) {
             return tradeMap.get(stockSymbol);
         } else {
-           throw new StockNotFoundException();
+           throw new NoTradesException();
         }
     }
 

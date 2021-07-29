@@ -1,6 +1,7 @@
 package com.simple.stock.market.assignment.calculator;
 
 import com.simple.stock.market.assignment.dao.TradeTracker;
+import com.simple.stock.market.assignment.exception.NoTradesException;
 import com.simple.stock.market.assignment.model.StockSymbol;
 import com.simple.stock.market.assignment.model.Trade;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,9 @@ public class VolumeWeightedStockPriceCalculator {
         ZonedDateTime tradeTimeCutOff = ZonedDateTime.now().minusMinutes(stockMinutesBackTrack);
         List<Trade> relevantTrades = tradeTracker.getTradesForStock(stockSymbol)
                 .parallelStream().filter(trade -> trade.getTimestamp().isAfter(tradeTimeCutOff)).collect(Collectors.toList());
-
+        if(relevantTrades.isEmpty()) {
+            throw new NoTradesException();
+        }
         Double numerator = relevantTrades.parallelStream().mapToDouble(trade -> trade.getPrice() * trade.getQuantity()).sum();
         Double denominator = relevantTrades.parallelStream().mapToDouble(Trade::getQuantity).sum();
 

@@ -1,6 +1,7 @@
 package com.simple.stock.market.assignment.calculator;
 
 import com.simple.stock.market.assignment.dao.TradeTracker;
+import com.simple.stock.market.assignment.exception.NoTradesException;
 import com.simple.stock.market.assignment.model.StockSymbol;
 import com.simple.stock.market.assignment.model.Trade;
 import com.simple.stock.market.assignment.model.TradeTypeIndicator;
@@ -10,8 +11,11 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
+import java.util.Collections;
 
+import static com.simple.stock.market.assignment.model.StockSymbol.TEA;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -40,6 +44,12 @@ class VolumeWeightedStockPriceCalculatorTest {
 
     @Test
     void calculateVolumeWeightedStockPrice() {
-        assertThat(testee.calculateVolumeWeightedStockPrice(StockSymbol.TEA, 1)).isEqualTo(2);
+        assertThat(testee.calculateVolumeWeightedStockPrice(TEA, 1)).isEqualTo(2);
+    }
+
+    @Test
+    void testExceptionThrownWhenNoTrades() {
+        when(tradeTracker.getTradesForStock(any(StockSymbol.class))).thenReturn(Collections.emptyList());
+        assertThrows(NoTradesException.class, () -> testee.calculateVolumeWeightedStockPrice(TEA, 1));
     }
 }
