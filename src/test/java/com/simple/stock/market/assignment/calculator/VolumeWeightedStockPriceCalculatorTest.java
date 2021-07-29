@@ -23,19 +23,23 @@ class VolumeWeightedStockPriceCalculatorTest {
     private VolumeWeightedStockPriceCalculator testee;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws InterruptedException {
         MockitoAnnotations.openMocks(this);
+        Trade nonIncludedTrade = new Trade( 6, TradeTypeIndicator.SELL, 6);
+
+        Thread.sleep(60000);
+
         Trade firstTrade = new Trade( 6, TradeTypeIndicator.SELL, 2);
         Trade secondTrade = new Trade(1, TradeTypeIndicator.SELL, 2);
         Trade thirdTrade = new Trade( 2, TradeTypeIndicator.SELL, 2);
         Trade fourthTrade = new Trade( 1, TradeTypeIndicator.SELL, 2);
         when(tradeTracker.getTradesForStock(any(StockSymbol.class))).thenReturn(Arrays.asList(
-                firstTrade, secondTrade, thirdTrade, fourthTrade));
+                nonIncludedTrade, firstTrade, secondTrade, thirdTrade, fourthTrade));
         testee = new VolumeWeightedStockPriceCalculator(tradeTracker);
     }
 
     @Test
     void calculateVolumeWeightedStockPrice() {
-        assertThat(testee.calculateVolumeWeightedStockPrice(StockSymbol.TEA, 5)).isEqualTo(2);
+        assertThat(testee.calculateVolumeWeightedStockPrice(StockSymbol.TEA, 1)).isEqualTo(2);
     }
 }
