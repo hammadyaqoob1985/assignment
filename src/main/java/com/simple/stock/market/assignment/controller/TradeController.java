@@ -3,6 +3,7 @@ package com.simple.stock.market.assignment.controller;
 import com.simple.stock.market.assignment.calculator.GBCECalculator;
 import com.simple.stock.market.assignment.calculator.VolumeWeightedStockPriceCalculator;
 import com.simple.stock.market.assignment.dao.TradeTracker;
+import com.simple.stock.market.assignment.exception.InvalidTradeException;
 import com.simple.stock.market.assignment.model.StockSymbol;
 import com.simple.stock.market.assignment.model.Trade;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,9 @@ public class TradeController {
 
     @RequestMapping(value = "/addTrade", method = RequestMethod.POST)
     public void addTrade(@RequestParam StockSymbol stockSymbol, @RequestBody Trade trade) {
+        if(trade.getPrice() <= 0 || trade.getQuantity() <= 0) {
+            throw new InvalidTradeException();
+        }
         tradeTracker.recordTrade(stockSymbol, trade);
     }
 

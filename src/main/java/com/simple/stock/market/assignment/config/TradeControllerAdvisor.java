@@ -1,5 +1,6 @@
 package com.simple.stock.market.assignment.config;
 
+import com.simple.stock.market.assignment.exception.InvalidTradeException;
 import com.simple.stock.market.assignment.exception.NoTradesException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,15 @@ public class TradeControllerAdvisor extends ResponseEntityExceptionHandler {
 
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("message", "No trade has been made");
+
+        return new ResponseEntity<>(body, HttpStatus.OK);
+    }
+
+    @ExceptionHandler(InvalidTradeException.class)
+    public ResponseEntity<Object> handleInvalidTrade() {
+
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("message", "Invalid Trade");
 
         return new ResponseEntity<>(body, HttpStatus.OK);
     }
