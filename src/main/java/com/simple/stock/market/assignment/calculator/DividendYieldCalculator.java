@@ -3,16 +3,21 @@ package com.simple.stock.market.assignment.calculator;
 import com.simple.stock.market.assignment.exception.InvalidPriceException;
 import com.simple.stock.market.assignment.model.Stock;
 import com.simple.stock.market.assignment.model.StockSymbol;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 import static com.simple.stock.market.assignment.model.StockType.COMMON;
 
+@Service
 public class DividendYieldCalculator {
 
     private final List<Stock> stocks;
 
-    public DividendYieldCalculator(List<Stock> stocks) {
+    @Autowired
+    public DividendYieldCalculator(@Qualifier("stocks") List<Stock> stocks) {
         this.stocks = stocks;
     }
 
