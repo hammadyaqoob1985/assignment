@@ -6,7 +6,6 @@ import com.simple.stock.market.assignment.model.TradeTypeIndicator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.ZonedDateTime;
 import java.util.List;
 
 import static com.simple.stock.market.assignment.model.StockSymbol.ALE;
@@ -23,9 +22,9 @@ class TradeTrackerTest {
     private TradeTracker testee;
     @BeforeEach
     void setUp() {
-        teaTrade = new Trade(ZonedDateTime.now(), 3, TradeTypeIndicator.BUY, 12);
-        firstAleTrade = new Trade(ZonedDateTime.now(), 5, TradeTypeIndicator.BUY, 12);
-        secondAleTrade = new Trade(ZonedDateTime.now(), 3, TradeTypeIndicator.SELL, 12);
+        teaTrade = new Trade(3, TradeTypeIndicator.BUY, 12);
+        firstAleTrade = new Trade(5, TradeTypeIndicator.BUY, 12);
+        secondAleTrade = new Trade(3, TradeTypeIndicator.SELL, 12);
 
         testee =  new TradeTracker();
     }

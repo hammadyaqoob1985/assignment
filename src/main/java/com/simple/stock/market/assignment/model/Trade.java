@@ -9,8 +9,8 @@ public class Trade {
     private final TradeTypeIndicator tradeTypeIndicator;
     private final double price;
 
-    public Trade(ZonedDateTime timestamp, int quantity, TradeTypeIndicator tradeTypeIndicator, double price) {
-        this.timestamp = timestamp;
+    public Trade(int quantity, TradeTypeIndicator tradeTypeIndicator, double price) {
+        this.timestamp = ZonedDateTime.now();
         this.quantity = quantity;
         this.tradeTypeIndicator = tradeTypeIndicator;
         this.price = price;

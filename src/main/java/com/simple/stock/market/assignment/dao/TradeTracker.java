@@ -3,12 +3,14 @@ package com.simple.stock.market.assignment.dao;
 import com.simple.stock.market.assignment.exception.StockNotFoundException;
 import com.simple.stock.market.assignment.model.StockSymbol;
 import com.simple.stock.market.assignment.model.Trade;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
+@Repository
 public class TradeTracker {
     private final ConcurrentHashMap<StockSymbol, List<Trade>> tradeMap;
 

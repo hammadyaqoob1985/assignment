@@ -3,10 +3,12 @@ package com.simple.stock.market.assignment.calculator;
 import com.simple.stock.market.assignment.dao.TradeTracker;
 import com.simple.stock.market.assignment.model.Trade;
 import org.apache.commons.math3.stat.StatUtils;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class GBCECalculator {
 
     private final TradeTracker tradeTracker;

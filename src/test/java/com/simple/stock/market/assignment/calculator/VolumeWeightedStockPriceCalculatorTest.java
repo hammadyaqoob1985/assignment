@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.time.ZonedDateTime;
 import java.util.Arrays;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
@@ -26,18 +25,17 @@ class VolumeWeightedStockPriceCalculatorTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        Trade nonInclusiveTrade = new Trade(ZonedDateTime.now().minusMinutes(6), 3, TradeTypeIndicator.SELL, 5);
-        Trade firstTrade = new Trade(ZonedDateTime.now().minusMinutes(4), 6, TradeTypeIndicator.SELL, 2);
-        Trade secondTrade = new Trade(ZonedDateTime.now().minusMinutes(3), 1, TradeTypeIndicator.SELL, 2);
-        Trade thirdTrade = new Trade(ZonedDateTime.now().minusMinutes(2), 2, TradeTypeIndicator.SELL, 2);
-        Trade fourthTrade = new Trade(ZonedDateTime.now().minusMinutes(1), 1, TradeTypeIndicator.SELL, 2);
-        when(tradeTracker.getTradesForStock(any(StockSymbol.class))).thenReturn(Arrays.asList(nonInclusiveTrade,
+        Trade firstTrade = new Trade( 6, TradeTypeIndicator.SELL, 2);
+        Trade secondTrade = new Trade(1, TradeTypeIndicator.SELL, 2);
+        Trade thirdTrade = new Trade( 2, TradeTypeIndicator.SELL, 2);
+        Trade fourthTrade = new Trade( 1, TradeTypeIndicator.SELL, 2);
+        when(tradeTracker.getTradesForStock(any(StockSymbol.class))).thenReturn(Arrays.asList(
                 firstTrade, secondTrade, thirdTrade, fourthTrade));
-        testee = new VolumeWeightedStockPriceCalculator(tradeTracker, 5);
+        testee = new VolumeWeightedStockPriceCalculator(tradeTracker);
     }
 
     @Test
     void calculateVolumeWeightedStockPrice() {
-        assertThat(testee.calculateVolumeWeightedStockPrice(StockSymbol.TEA)).isEqualTo(2);
+        assertThat(testee.calculateVolumeWeightedStockPrice(StockSymbol.TEA, 5)).isEqualTo(2);
     }
 }

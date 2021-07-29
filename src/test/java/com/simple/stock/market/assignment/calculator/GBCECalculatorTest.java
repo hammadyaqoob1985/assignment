@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.time.ZonedDateTime;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,10 +24,10 @@ class GBCECalculatorTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        Trade firstTrade = new Trade(ZonedDateTime.now().minusMinutes(4), 6, TradeTypeIndicator.SELL, 2);
-        Trade secondTrade = new Trade(ZonedDateTime.now().minusMinutes(3), 1, TradeTypeIndicator.SELL, 2);
-        Trade thirdTrade = new Trade(ZonedDateTime.now().minusMinutes(2), 2, TradeTypeIndicator.SELL, 2);
-        Trade fourthTrade = new Trade(ZonedDateTime.now().minusMinutes(1), 1, TradeTypeIndicator.SELL, 2);
+        Trade firstTrade = new Trade(6, TradeTypeIndicator.SELL, 2);
+        Trade secondTrade = new Trade( 1, TradeTypeIndicator.SELL, 2);
+        Trade thirdTrade = new Trade(2, TradeTypeIndicator.SELL, 2);
+        Trade fourthTrade = new Trade(1, TradeTypeIndicator.SELL, 2);
         when(tradeTracker.getAllTrades()).thenReturn(Arrays.asList(firstTrade, secondTrade, thirdTrade, fourthTrade));
         testee = new GBCECalculator(tradeTracker);
     }
