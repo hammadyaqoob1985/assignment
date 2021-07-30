@@ -19,8 +19,8 @@ public class VolumeWeightedStockPriceCalculatorImpl implements VolumeWeightedSto
         this.tradeTracker = tradeTracker;
     }
 
-    public double calculateVolumeWeightedStockPrice(StockSymbol stockSymbol, int stockMinutesBackTrack) {
-        ZonedDateTime tradeTimeCutOff = ZonedDateTime.now().minusMinutes(stockMinutesBackTrack);
+    public double calculateVolumeWeightedStockPrice(StockSymbol stockSymbol, int tradeMinutesBackTrack) {
+        ZonedDateTime tradeTimeCutOff = ZonedDateTime.now().minusMinutes(tradeMinutesBackTrack);
         List<Trade> relevantTrades = tradeTracker.getTradesForStock(stockSymbol)
                 .parallelStream().filter(trade -> trade.getTimestamp().isAfter(tradeTimeCutOff)).collect(Collectors.toList());
         if(relevantTrades.isEmpty()) {

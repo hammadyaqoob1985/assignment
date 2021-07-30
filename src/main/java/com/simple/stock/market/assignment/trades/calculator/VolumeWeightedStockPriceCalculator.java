@@ -4,5 +4,5 @@ import com.simple.stock.market.assignment.common.model.StockSymbol;
 
 public interface VolumeWeightedStockPriceCalculator {
 
-    double calculateVolumeWeightedStockPrice(StockSymbol stockSymbol, int stockMinutesBackTrack);
+    double calculateVolumeWeightedStockPrice(StockSymbol stockSymbol, int tradeMinutesBackTrack);
 }

@@ -33,8 +33,8 @@ public class TradeController {
 
     @RequestMapping(value = "/calculateVolumeWeightedStockPrice", method = RequestMethod.GET)
     @ResponseBody
-    public double calculateVolumeWeightedStockPrice(@RequestParam StockSymbol stockSymbol, @RequestParam int stockMinutesBackTrack) {
-        return volumeWeightedStockPriceCalculator.calculateVolumeWeightedStockPrice(stockSymbol, stockMinutesBackTrack);
+    public double calculateVolumeWeightedStockPrice(@RequestParam StockSymbol stockSymbol, @RequestParam int tradeMinutesBackTrack) {
+        return volumeWeightedStockPriceCalculator.calculateVolumeWeightedStockPrice(stockSymbol, tradeMinutesBackTrack);
     }
 
     @RequestMapping(value = "/calculateGBCE", method = RequestMethod.GET)
