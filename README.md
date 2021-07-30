@@ -18,7 +18,7 @@ Coding Assignment – Super Simple Stock Market
 
 To run the REST APIs
 * Run the class AssignmentApplication.java
-* After the Server is started by the above command. Please open http://localhost:8080/swagger-ui.html on Browser
+* After the Server has started by the above command. Please open http://localhost:8080/swagger-ui.html on Browser
 * Now we can run the APIs by filling appropriate values needed for the APIs
 
 
