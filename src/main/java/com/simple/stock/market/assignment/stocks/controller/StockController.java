@@ -1,8 +1,8 @@
 package com.simple.stock.market.assignment.stocks.controller;
 
+import com.simple.stock.market.assignment.common.model.StockSymbol;
 import com.simple.stock.market.assignment.stocks.calculator.DividendYieldCalculator;
 import com.simple.stock.market.assignment.stocks.calculator.PERatioCalculator;
-import com.simple.stock.market.assignment.common.model.StockSymbol;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

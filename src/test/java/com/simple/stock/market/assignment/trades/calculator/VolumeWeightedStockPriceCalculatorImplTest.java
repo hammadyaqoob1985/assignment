@@ -1,7 +1,7 @@
 package com.simple.stock.market.assignment.trades.calculator;
 
 import com.simple.stock.market.assignment.common.model.StockSymbol;
-import com.simple.stock.market.assignment.trades.dao.TradeTracker;
+import com.simple.stock.market.assignment.trades.dao.TradeTrackerImpl;
 import com.simple.stock.market.assignment.trades.exception.NoTradesException;
 import com.simple.stock.market.assignment.trades.model.Trade;
 import com.simple.stock.market.assignment.trades.model.TradeTypeIndicator;
@@ -19,17 +19,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-class VolumeWeightedStockPriceCalculatorTest {
+class VolumeWeightedStockPriceCalculatorImplTest {
 
     @Mock
-    private TradeTracker tradeTracker;
+    private TradeTrackerImpl tradeTracker;
 
-    private VolumeWeightedStockPriceCalculator testee;
+    private VolumeWeightedStockPriceCalculatorImpl testee;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        testee = new VolumeWeightedStockPriceCalculator(tradeTracker);
+        testee = new VolumeWeightedStockPriceCalculatorImpl(tradeTracker);
     }
 
     @Test

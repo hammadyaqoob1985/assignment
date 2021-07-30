@@ -1,7 +1,6 @@
 package com.simple.stock.market.assignment.stocks.calculator;
 
-import com.simple.stock.market.assignment.stocks.calculator.PERatioCalculator;
-import com.simple.stock.market.assignment.stocks.exceptions.InvalidDividendException;
+import com.simple.stock.market.assignment.stocks.exceptions.InvalidPriceException;
 import com.simple.stock.market.assignment.stocks.model.Stock;
 import com.simple.stock.market.assignment.stocks.model.StockBuilder;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,10 +15,10 @@ import static com.simple.stock.market.assignment.stocks.model.StockType.PREFERRE
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class PERatioCalculatorTest {
+class DividendYieldCalculatorImplTest {
 
     private List<Stock> stocks;
-    private PERatioCalculator testeeCalculator;
+    private DividendYieldCalculatorImpl testeeCalculator;
     Stock teaStock;
     Stock popStock;
     Stock aleStock;
@@ -34,18 +33,23 @@ class PERatioCalculatorTest {
         ginStock = new StockBuilder().setSymbol(GIN).setStockType(PREFERRED).setLastDividend(8).setFixedDividend(0.02).setParValue(100).createStock();
         joeStock = new StockBuilder().setSymbol(JOE).setStockType(COMMON).setLastDividend(13).setParValue(250).createStock();
         stocks = Arrays.asList(teaStock, popStock, aleStock, ginStock, joeStock);
-        testeeCalculator = new PERatioCalculator(stocks);
+        testeeCalculator = new DividendYieldCalculatorImpl(stocks);
     }
 
     @Test
-    void calculatesPERatioCorrectly() {
-        assertThat(testeeCalculator.calculatePERatio(ALE, 20)).isEqualTo(20.0 / aleStock.getLastDividend());
+    void returnCorrectValueForCommonStock() {
+        assertThat(testeeCalculator.calculateDividendYield(POP, 20)).isEqualTo(popStock.getLastDividend() / 20.0);
     }
 
     @Test
-    void throwsExceptionWhenDividendIsZero() {
-        assertThrows(InvalidDividendException.class, () -> {
-            testeeCalculator.calculatePERatio(TEA, 20);
+    void returnCorrectValueForPreferredStock() {
+        assertThat(testeeCalculator.calculateDividendYield(GIN, 20)).isEqualTo((ginStock.getFixedDividend() *  ginStock.getParValue())/ 20.0);
+    }
+
+    @Test
+    void throwsErrorWhenInvalidPriceEntered() {
+        assertThrows(InvalidPriceException.class, () -> {
+            testeeCalculator.calculateDividendYield(GIN, 0);
         });
     }
 }

@@ -13,20 +13,20 @@ import static com.simple.stock.market.assignment.common.model.StockSymbol.TEA;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class TradeTrackerTest {
+class TradeTrackerImplTest {
 
     Trade teaTrade;
     Trade firstAleTrade;
     Trade secondAleTrade;
 
-    private TradeTracker testee;
+    private TradeTrackerImpl testee;
     @BeforeEach
     void setUp() {
         teaTrade = new Trade(3, TradeTypeIndicator.BUY, 12);
         firstAleTrade = new Trade(5, TradeTypeIndicator.BUY, 12);
         secondAleTrade = new Trade(3, TradeTypeIndicator.SELL, 12);
 
-        testee =  new TradeTracker();
+        testee =  new TradeTrackerImpl();
     }
 
     @Test

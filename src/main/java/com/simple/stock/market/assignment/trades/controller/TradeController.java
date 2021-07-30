@@ -1,10 +1,10 @@
 package com.simple.stock.market.assignment.trades.controller;
 
+import com.simple.stock.market.assignment.common.model.StockSymbol;
 import com.simple.stock.market.assignment.trades.calculator.GBCECalculator;
 import com.simple.stock.market.assignment.trades.calculator.VolumeWeightedStockPriceCalculator;
 import com.simple.stock.market.assignment.trades.dao.TradeTracker;
 import com.simple.stock.market.assignment.trades.exception.InvalidTradeException;
-import com.simple.stock.market.assignment.common.model.StockSymbol;
 import com.simple.stock.market.assignment.trades.model.Trade;
 import org.springframework.web.bind.annotation.*;
 

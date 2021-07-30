@@ -1,42 +1,15 @@
 package com.simple.stock.market.assignment.trades.dao;
 
-import com.simple.stock.market.assignment.trades.exception.NoTradesException;
 import com.simple.stock.market.assignment.common.model.StockSymbol;
 import com.simple.stock.market.assignment.trades.model.Trade;
-import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
 
-@Repository
-public class TradeTracker {
-    private final ConcurrentHashMap<StockSymbol, List<Trade>> tradeMap;
+public interface TradeTracker {
 
-    public TradeTracker() {
-        this.tradeMap = new ConcurrentHashMap<>();
-    }
+    void recordTrade(StockSymbol stockSymbol, Trade trade);
 
-    public void recordTrade(StockSymbol stockSymbol, Trade trade) {
-        if(tradeMap.containsKey(stockSymbol)) {
-            tradeMap.get(stockSymbol).add(trade);
-        } else {
-            List<Trade> tradesForStock =  new ArrayList<>();
-            tradesForStock.add(trade);
-            tradeMap.put(stockSymbol, tradesForStock);
-        }
-    }
+    List<Trade> getTradesForStock(StockSymbol stockSymbol);
 
-    public List<Trade> getTradesForStock(StockSymbol stockSymbol) {
-        if(tradeMap.containsKey(stockSymbol)) {
-            return tradeMap.get(stockSymbol);
-        } else {
-           throw new NoTradesException();
-        }
-    }
-
-    public List<Trade> getAllTrades() {
-        return tradeMap.entrySet().stream().flatMap(e -> e.getValue().stream()).collect(Collectors.toList());
-    }
+    List<Trade> getAllTrades();
 }

@@ -1,6 +1,6 @@
 package com.simple.stock.market.assignment.trades.calculator;
 
-import com.simple.stock.market.assignment.trades.dao.TradeTracker;
+import com.simple.stock.market.assignment.trades.dao.TradeTrackerImpl;
 import com.simple.stock.market.assignment.trades.model.Trade;
 import com.simple.stock.market.assignment.trades.model.TradeTypeIndicator;
 import org.apache.commons.math3.stat.StatUtils;
@@ -14,12 +14,12 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-class GBCECalculatorTest {
+class GBCECalculatorImplTest {
 
     @Mock
-    private TradeTracker tradeTracker;
+    private TradeTrackerImpl tradeTracker;
 
-    private GBCECalculator testee;
+    private GBCECalculatorImpl testee;
 
     @BeforeEach
     void setUp() {
@@ -29,7 +29,7 @@ class GBCECalculatorTest {
         Trade thirdTrade = new Trade(2, TradeTypeIndicator.SELL, 2);
         Trade fourthTrade = new Trade(1, TradeTypeIndicator.SELL, 2);
         when(tradeTracker.getAllTrades()).thenReturn(Arrays.asList(firstTrade, secondTrade, thirdTrade, fourthTrade));
-        testee = new GBCECalculator(tradeTracker);
+        testee = new GBCECalculatorImpl(tradeTracker);
     }
 
     @Test
