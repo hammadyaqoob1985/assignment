@@ -17,6 +17,7 @@ Coding Assignment – Super Simple Stock Market
 * It is integrated with Swagger which enables the User to run the APIs from Browser
 
 To run the REST APIs
+* Run the class AssignmentApplication.java
 * After the Server is started by the above command. Please open http://localhost:8080/swagger-ui.html on Browser
 * Now we can run the APIs by filling appropriate values needed for the APIs
 
